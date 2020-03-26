@@ -1,0 +1,19 @@
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 0.2em;
+}
+
+details {
+  cursor: pointer;
+}
+
+summary {
+  outline: none;
+}
+
+main {
+  max-width: max-content;
+}
