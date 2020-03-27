@@ -25,8 +25,8 @@ function createList(parent, list) {
   });
 }
 
-fetch('list.json').then(response => response.json()).then(list => {
+function init() {
   let ul = document.createElement('ul');
   createList(ul, list);
   document.getElementsByTagName('main')[0].appendChild(ul);
-});
+}
