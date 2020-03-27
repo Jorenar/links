@@ -17,3 +17,7 @@ summary {
 main {
   max-width: max-content;
 }
+
+button {
+  margin-top: 1em;
+}

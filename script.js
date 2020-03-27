@@ -29,4 +29,14 @@ function init() {
   let ul = document.createElement('ul');
   createList(ul, list);
   document.getElementsByTagName('main')[0].appendChild(ul);
+
+  nodes = Array.prototype.slice.call(document.getElementsByTagName('details'));
+}
+
+function collapse() {
+  nodes.forEach(x => x.removeAttribute('open'));
+}
+
+function expand() {
+  nodes.forEach(x => x.setAttribute('open', ''));
 }
