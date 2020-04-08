@@ -19,8 +19,17 @@ function createList(parent, list) {
     } else {
       let a = document.createElement('a');
       a.innerText = key;
-      a.href = value;
-      li.appendChild(a);
+      if (value instanceof Array) {
+        a.href = value[0];
+        let comment = document.createElement('span');
+        comment.innerText = ' -- ' + value[1];
+        comment.className = 'comment';
+        li.appendChild(a);
+        li.appendChild(comment);
+      } else {
+        a.href = value;
+        li.appendChild(a);
+      }
     }
 
     parent.appendChild(li);

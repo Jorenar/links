@@ -21,3 +21,7 @@ main {
 button {
   margin-top: 1em;
 }
+
+.comment {
+  color: #999;
+}
