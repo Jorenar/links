@@ -1,5 +1,7 @@
 function createList(parent, list) {
-  Object.keys(list).sort().forEach(function(key) {
+  Object.keys(list).sort((a, b) => {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  }).forEach(function(key) {
     let value = list[key];
 
     let li = document.createElement('li');
