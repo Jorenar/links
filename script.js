@@ -1,3 +1,5 @@
+var count = 0;
+
 function createList(parent, list) {
   Object.keys(list).sort((a, b) => {
     return a.toLowerCase().localeCompare(b.toLowerCase());
@@ -17,6 +19,7 @@ function createList(parent, list) {
       details.appendChild(ul);
       li.appendChild(details);
     } else {
+      count++;
       let a = document.createElement('a');
       a.innerText = key;
       if (value instanceof Array) {
@@ -42,6 +45,8 @@ function init() {
   document.getElementsByTagName('main')[0].appendChild(ul);
 
   nodes = Array.prototype.slice.call(document.getElementsByTagName('details'));
+
+  document.getElementById('count').innerText = count;
 }
 
 function collapse() {
