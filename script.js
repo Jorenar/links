@@ -39,14 +39,26 @@ function createList(parent, list) {
   });
 }
 
+function fixTrailingCommas(jsonString) {
+  var jsonObj;
+  eval('jsonObj = ' + jsonString);
+  return JSON.stringify(jsonObj);
+}
+
 function init() {
-  let ul = document.createElement('ul');
-  createList(ul, list);
-  document.getElementsByTagName('main')[0].appendChild(ul);
+   fetch('https://api.github.com/gists/3a23772398afa4322452ef6d54c4850f')
+    .then(response => response.json())
+    .then(data => {
+      let list = JSON.parse(fixTrailingCommas(data.files.urlList.content))
 
-  nodes = Array.prototype.slice.call(document.getElementsByTagName('details'));
+      let ul = document.createElement('ul');
+      createList(ul, list);
+      document.getElementsByTagName('main')[0].appendChild(ul);
 
-  document.getElementById('count').innerText = count;
+      nodes = Array.prototype.slice.call(document.getElementsByTagName('details'));
+
+      document.getElementById('count').innerText = count;
+    })
 }
 
 function collapse() {
