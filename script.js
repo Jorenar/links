@@ -46,10 +46,10 @@ function fixTrailingCommas(jsonString) {
 }
 
 function init() {
-   fetch('https://api.github.com/gists/3a23772398afa4322452ef6d54c4850f')
+   fetch('https://api.github.com/gists/c5a3d6d3b2de7e6f7cf6f8df82030b26')
     .then(response => response.json())
     .then(data => {
-      let list = JSON.parse(fixTrailingCommas(data.files.urlList.content))
+      let list = JSON.parse(fixTrailingCommas(data.files.urlsList.content))
 
       let ul = document.createElement('ul');
       createList(ul, list);
