@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,11 +13,14 @@
 <body onload='init()'>
   <header>
     <b>A list of <span id='count'></span> links to various tools and resources <a href="https://joren.ga">Jorengarenar</a> has found on the World Wide Web</b>
-    <a style='float:right' href="https://github.com/Jorengarenar/urlsList">View on GitHub</a>
-    <p style='font-size:0.7em;margin-left:2em'><i>Warning: multilingual</i></p>
+    <a style='float:right' href="https://github.com/Jorengarenar/resources">View on GitHub</a>
   </header>
-  <button onclick='expand()'>EXPAND</button>
-  <button onclick='collapse()'>COLLAPSE</button>
-  <main> </main>
+  <main>
+    <details>
+      <summary>Filter by tags</summary>
+      <ul id="filters"> </ul>
+      <button onclick="filterByTags()">Filter</button>
+    </details>
+  </main>
 </body>
 </html>

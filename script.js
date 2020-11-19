@@ -1,70 +1,90 @@
-var count = 0;
+var table = document.createElement("table");
+var list;
+var allTags = new Set();
+var filterTags = [];
 
-function createList(parent, list) {
-  Object.keys(list).sort((a, b) => {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
-  }).forEach(function(key) {
-    let value = list[key];
+function genTable(firstRun) {
+  table.innerHTML = "";
+  let skipFilters = firstRun || filterTags.length == 0;
 
-    let li = document.createElement('li');
-    let details = document.createElement('details');
-    let summary = document.createElement('summary');
+  // Add JSON data to the table as rows
+  for (let l of list) {
+    if (skipFilters || filterTags.every(v => l["tags"].includes(v))) {
+      let tr = table.insertRow(-1);
 
-    summary.innerText = key;
-    details.appendChild(summary);
-    let ul = document.createElement('ul');
+      let name = tr.insertCell(-1);
+      let name_a = document.createElement("a");
+      name_a.href = l["url"];
+      name_a.innerHTML = l["name"];
+      name.appendChild(name_a);
+      name.className = "name";
 
-    if (typeof value === 'object' && !(value instanceof Array)) {
-      createList(ul, value);
-      details.appendChild(ul);
-      li.appendChild(details);
-    } else {
-      count++;
-      let a = document.createElement('a');
-      a.innerText = key;
-      if (value instanceof Array) {
-        a.href = value[0];
-        let comment = document.createElement('span');
-        comment.innerText = ' -- ' + value[1];
-        comment.className = 'comment';
-        li.appendChild(a);
-        li.appendChild(comment);
-      } else {
-        a.href = value;
-        li.appendChild(a);
+      let lang = tr.insertCell(-1);
+      lang.innerText = l["lang"];
+
+      let tags = tr.insertCell(-1);
+      if (firstRun) {
+        l["tags"].forEach(allTags.add, allTags)
       }
-    }
+      tags.innerText = l["tags"].sort().join(', ');
+      tags.className = "tags";
 
-    parent.appendChild(li);
-  });
+      let description = tr.insertCell(-1);
+      description.innerText = l["desc"];
+      description.className = "desc";
+    }
+  }
+
 }
 
-function fixTrailingCommas(jsonString) {
-  var jsonObj;
-  eval('jsonObj = ' + jsonString);
-  return JSON.stringify(jsonObj);
+function filterByTags() {
+  let boxes = document.querySelectorAll("ul#filters > li > label > input");
+  filterTags = [];
+  for (let box of boxes) {
+    if (box.checked) {
+      filterTags.push(box.value);
+    }
+  }
+  genTable(0);
 }
 
 function init() {
-   fetch('https://api.github.com/gists/c5a3d6d3b2de7e6f7cf6f8df82030b26')
+  fetch('https://api.github.com/gists/5864eaba80491581d73ed49e9f2812a2')
     .then(response => response.json())
     .then(data => {
-      let list = JSON.parse(fixTrailingCommas(data.files.urlsList.content))
+      list = JSON.parse(data.files["resources.json"].content);
+      list = list.sort((a, b) => {
+        return a["name"].toLowerCase().localeCompare(b["name"].toLowerCase());
+      });
 
-      let ul = document.createElement('ul');
-      createList(ul, list);
-      document.getElementsByTagName('main')[0].appendChild(ul);
+      let main = document.querySelector("main");
 
-      nodes = Array.prototype.slice.call(document.getElementsByTagName('details'));
+      let filters = document.querySelector("ul#filters");
 
-      document.getElementById('count').innerText = count;
+      document.getElementById('count').innerText = list.length;
+
+      genTable(1);
+
+      main.appendChild(table);
+
+      allTags = [...allTags].sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+      });
+
+      for (let tag of allTags) {
+        let box = document.createElement("input");
+        box.type = "checkbox";
+        box.value = tag;
+
+        let label = document.createElement("label");
+        label.innerText = tag;
+        label.prepend(box);
+
+        let li = document.createElement("li");
+        li.appendChild(label);
+
+        filters.appendChild(li);
+      }
+
     })
-}
-
-function collapse() {
-  nodes.forEach(x => x.removeAttribute('open'));
-}
-
-function expand() {
-  nodes.forEach(x => x.setAttribute('open', ''));
 }

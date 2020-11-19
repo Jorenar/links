@@ -7,30 +7,23 @@ main {
   margin-top: initial;
 }
 
-ul {
-  list-style-type: none;
+header {
+  margin-bottom: 1em;
 }
 
-li {
-  margin: 0.2em;
+ul {
+  column-width: calc(100vw / 6 + 10ch);
 }
 
 details {
   cursor: pointer;
+  margin-bottom: 1em;
 }
 
-summary {
-  outline: none;
+td.name, td.tags {
+  width: 40em;
 }
 
-main {
-  max-width: max-content;
-}
-
-button {
-  margin-top: 1em;
-}
-
-.comment {
-  color: #666;
+td.desc {
+  width: calc(100vw - 85em);
 }
