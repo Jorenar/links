@@ -81,9 +81,7 @@ function init() {
 
       for (let file of JSON.parse(data.files["order.json"].content)) {
         tables[file] = document.createElement("details");
-        db[file] = JSON.parse(data.files[file + ".json"].content).sort((a, b) => {
-          return a["name"].toLowerCase().localeCompare(b["name"].toLowerCase());
-        });
+        db[file] = JSON.parse(data.files[file + ".json"].content);
         count += db[file].length;
       }
 
