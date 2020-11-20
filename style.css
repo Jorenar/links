@@ -20,10 +20,25 @@ details {
   margin-bottom: 1em;
 }
 
-td.name, td.tags {
+.filtering summary {
+  display: flex;
+  justify-content: flex-end;
+}
+
+td.name,
+td.tags {
   width: 40em;
 }
 
 td.desc {
   width: calc(100vw - 85em);
+}
+
+#tables summary {
+  font-size: 1.2em;
+  margin-bottom: 0.3em;
+}
+
+#tables summary:first-letter {
+  text-transform: capitalize
 }
