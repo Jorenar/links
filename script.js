@@ -79,10 +79,11 @@ function init() {
 
       tablesDiv = document.querySelector("div#tables");
 
-      for (let file of JSON.parse(data.files["order.json"].content)) {
-        tables[file] = document.createElement("details");
-        db[file] = JSON.parse(data.files[file + ".json"].content);
-        count += db[file].length;
+      let order = JSON.parse(data.files["order.json"].content);
+      for (let list of Object.keys(order)) {
+        tables[list] = document.createElement("details");
+        db[list] = JSON.parse(data.files[order[list]].content);
+        count += db[list].length;
       }
 
       document.getElementById('count').innerText = count;
