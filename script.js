@@ -3,6 +3,7 @@ var tables = {};
 var tablesDiv;
 var allTags = new Set();
 var filterTags = [];
+var nodes;
 
 function genTables(firstRun) {
   tablesDiv.innerHTML = "";
@@ -110,5 +111,15 @@ function init() {
         filters.appendChild(li);
       }
 
+      nodes = Array.prototype.slice.call(document.querySelectorAll('details:not(.filtering)'));
+
     })
+}
+
+function collapse() {
+  nodes.forEach(x => x.removeAttribute('open'));
+}
+
+function expand() {
+  nodes.forEach(x => x.setAttribute('open', ''));
 }
