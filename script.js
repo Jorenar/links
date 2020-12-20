@@ -40,7 +40,7 @@ function genTables(firstRun) {
 
         let tags = tr.insertCell(-1);
         if (firstRun) {
-          l["tags"].forEach(allTags.add, allTags)
+          l["tags"].forEach(allTags.add, allTags);
         }
         tags.innerText = l["tags"].sort().join(', ');
         tags.className = "tags";
@@ -74,7 +74,6 @@ function init() {
   fetch('https://api.github.com/gists/5864eaba80491581d73ed49e9f2812a2')
     .then(response => response.json())
     .then(data => {
-      let main = document.querySelector("main");
       let filters = document.querySelector("ul#filters");
       let count = 0;
 
