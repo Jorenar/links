@@ -25,7 +25,7 @@ function genTables(firstRun) {
 
     // Add JSON data to the table as rows
     for (let l of list) {
-      if (skipFilters || filterTags.every(v => l["tags"].includes(v))) {
+      if (skipFilters || filterTags.every((v) => l["tags"].includes(v))) {
         let tr = table.insertRow(-1);
 
         let name = tr.insertCell(-1);
@@ -71,9 +71,9 @@ function filterByTags() {
 }
 
 function init() {
-  fetch('https://api.github.com/gists/5864eaba80491581d73ed49e9f2812a2')
-    .then(response => response.json())
-    .then(data => {
+  fetch("https://api.github.com/gists/5864eaba80491581d73ed49e9f2812a2")
+    .then((response) => response.json())
+    .then((data) => {
       let filters = document.querySelector("ul#filters");
       let count = 0;
 
@@ -86,7 +86,7 @@ function init() {
         count += db[list].length;
       }
 
-      document.getElementById('count').innerText = count;
+      document.getElementById("count").innerText = count;
 
       genTables(1);
 
@@ -110,15 +110,15 @@ function init() {
         filters.appendChild(li);
       }
 
-      nodes = Array.prototype.slice.call(document.querySelectorAll('details:not(.filtering)'));
+      nodes = Array.prototype.slice.call(document.querySelectorAll("details:not(.filtering)"));
 
-    })
+    });
 }
 
 function collapse() {
-  nodes.forEach(x => x.removeAttribute('open'));
+  nodes.forEach((x) => x.removeAttribute("open"));
 }
 
 function expand() {
-  nodes.forEach(x => x.setAttribute('open', ''));
+  nodes.forEach(x => x.setAttribute("open", ""));
 }

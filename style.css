@@ -3,13 +3,14 @@ body {
   text-align: initial;
   font-size: 1.5em;
   background-color: black;
-  color: #DDD;
+  color: #ddd;
   font-family: monospace;
 }
 
-a, a:visited {
+a,
+a:visited {
   text-decoration: none;
-  color: #9D959D;
+  color: #9d959d;
 }
 
 a:hover {
@@ -29,9 +30,11 @@ ul {
   list-style-type: none;
 }
 
-tr, td, th {
+tr,
+td,
+th {
   padding: 0.5em;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
 }
 
 details {
@@ -47,7 +50,8 @@ summary {
   justify-content: flex-end;
 }
 
-td.name, td.tags {
+td.name,
+td.tags {
   width: 40em;
 }
 
