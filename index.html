@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,21 +8,42 @@
   <meta name="keywords" content="urls,url,resources,interestiong,various,topics">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/sql-asm.min.js" integrity="sha512-ZNUwfV1yoTUObEM0TcN+3RWobxeALgm2PBGA8JYIVqK0e3eYrvnen5awsg5zUPrBm0cEQJUZU3HkKakyyEZoLA==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js" integrity="sha512-DEcSaL0BWApJ//v7ZfqAI04nvK+NQcUVwrrx/l1x7OJgU0Cwbq7e459NBMzLPrm8eLPzAwBtiJJS4AvLZDZ8xA==" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </head>
-<body onload='init()'>
+<body onload="init()">
   <header>
     <b>A list of <span id='count'></span> links to various tools and resources <a href="https://joren.ga">Jorengarenar</a> has found on the World Wide Web</b>
-    <a style='float:right' href="https://github.com/Jorengarenar/resources">View on GitHub</a>
+    <a style='float:right' href="https://github.com/Jorengarenar/resources">
+      <img style='width:1.5em; margin:5px' src="https://github.com/fluidicon.png" alt="View on GitHub">
+    </a>
   </header>
   <main>
-    <button onclick='expand()'>EXPAND</button>
-    <button onclick='collapse()'>COLLAPSE</button>
-    <details class="filtering">
-      <summary>Filter by tags</summary>
-      <ul id="filters"> </ul>
+    <details>
+      <summary>Filters</summary>
+      <div id="filters">
+        <input id="search" onkeyup="filter()" type="text" placeholder="Search...">
+        <div>
+          <ul id="types"><h3>Types</h3></ul>
+          <ul id="languages"><h3>Languages</h3></ul>
+          <div id="tagsContainer">
+            <h3>Tags</h3>
+            <div id="tags"></div>
+          </div>
+        </div>
+      </div>
     </details>
-    <div id="tables"> </div>
+    <table data-sortable>
+      <thead>
+        <th data-sorted-direction="ascending"> Link </th>
+        <th> Type </th>
+        <th> Tags </th>
+        <th> Lang </th>
+        <th> Description </th>
+      </thead>
+      <tbody> <tbody>
+    </table>
   </main>
 </body>
 </html>

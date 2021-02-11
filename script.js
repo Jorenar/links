@@ -1,124 +1,154 @@
-var db = {};
-var tables = {};
-var tablesDiv;
-var allTags = new Set();
-var filterTags = [];
-var nodes;
+var db;
 
-function genTables(firstRun) {
-  tablesDiv.innerHTML = "";
+function genTable(filters = {}) {
+  let query = "SELECT * FROM links"
 
-  for (let foo of Object.keys(db)) {
-    let tableContainer = tables[foo];
-    tableContainer.innerHTML = "";
+  let n = Object.entries(filters).reduce((c, a) => c + (a[1].length > 0), 0);
+  n -= (filters.text && filters.text[0] == "");
 
-    let bar = document.createElement("summary");
-    bar.innerHTML = "<b>" + foo + "</b>";
-    tableContainer.appendChild(bar);
+  if (n) {
+    query += " WHERE";
 
-    let table = document.createElement("table");
-    tableContainer.appendChild(table);
+    const append = (sql) => { query += sql + (--n ? " AND " : "") };
 
-    let skipFilters = firstRun || filterTags.length == 0;
-
-    let list = db[foo];
-
-    // Add JSON data to the table as rows
-    for (let l of list) {
-      if (skipFilters || filterTags.every((v) => l["tags"].includes(v))) {
-        let tr = table.insertRow(-1);
-
-        let name = tr.insertCell(-1);
-        let name_a = document.createElement("a");
-        name_a.href = l["url"];
-        name_a.innerHTML = l["name"];
-        name.appendChild(name_a);
-        name.className = "name";
-
-        let lang = tr.insertCell(-1);
-        lang.innerText = l["lang"];
-
-        let tags = tr.insertCell(-1);
-        if (firstRun) {
-          l["tags"].forEach(allTags.add, allTags);
-        }
-        tags.innerText = l["tags"].sort().join(', ');
-        tags.className = "tags";
-
-        let description = tr.insertCell(-1);
-        description.innerText = l["desc"];
-        description.className = "desc";
-      }
+    if (filters.text[0] != "") {
+      let text = filters.text[0].replaceAll("'", "''");
+      append(" (title LIKE '%" + text + "%' OR description LIKE '%" + text + "%')");
     }
 
-    if (table.rows.length > 0) {
-      tablesDiv.appendChild(tableContainer);
+    if (filters.types.length) {
+      append(" typeID IN (" + filters.types.join(',') + ")");
     }
 
+    if (filters.languages.length) {
+      append(` id IN (SELECT linkID FROM langs
+                      WHERE lang IN (` + filters.languages.join(',') + `))`);
+    }
+
+    if (filters.tags.length) {
+      append(` id IN (SELECT linkID FROM taggings
+                      WHERE tagID IN (` + filters.tags.join(',') + `)
+                      GROUP BY linkID
+                      HAVING(COUNT(*) >= ` + filters.tags.length + `))`);
+    }
+  }
+  query += " ORDER BY title COLLATE NOCASE";
+
+  let contents = db.exec(query);
+
+  let table = document.querySelector("tbody");
+  table.innerHTML = "";
+
+  if (!contents[0]) {
+    return;
   }
 
+  contents[0].values.forEach((link) => {
+    let type = db.exec("SELECT * FROM types WHERE id = " + link[4]);
+
+    let tags = db.exec(`SELECT tag FROM tags
+                        JOIN taggings ON taggings.tagID = tags.id
+                        WHERE taggings.linkID = ` + link[0]);
+
+    let langs = db.exec("SELECT lang FROM langs WHERE linkID = " + link[0]);
+
+    let r = table.insertRow();
+    let row = r.insertCell.bind(r);
+
+    let url = document.createElement("a");
+    url.setAttribute("href", link[2]);
+    url.innerText = link[1];
+    row().appendChild(url);
+
+    /* type */        row().innerText = type[0]  ? type[0].values[0][1] : "";
+    /* tags */        row().innerText = tags[0]  ? tags[0].values.map(x => x[0]).join(", ") : "";
+    /* language */    row().innerText = langs[0] ? langs[0].values.map(x => x[0]).join(", ") : "";
+    /* description */ row().innerText = link[3];
+
+  });
 }
 
-function filterByTags() {
-  let boxes = document.querySelectorAll("ul#filters > li > label > input");
-  filterTags = [];
-  for (let box of boxes) {
-    if (box.checked) {
-      filterTags.push(box.value);
-    }
-  }
-  genTables(0);
+function filter() {
+  const checked = (selector) => {
+    let bar = document.querySelectorAll("#filters " + selector + " input");
+    return Array.from(bar).filter(x => x.checked).map(x => x.value);
+  };
+  genTable({
+    text: [ document.querySelector('#search').value.toLowerCase() ],
+    types: checked("#types"),
+    languages: checked("#languages"),
+    tags: checked("#tags"),
+  });
 }
 
 function init() {
-  fetch("https://api.github.com/gists/5864eaba80491581d73ed49e9f2812a2")
-    .then((response) => response.json())
+  fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db")
+    .then((response) => response.arrayBuffer())
     .then((data) => {
-      let filters = document.querySelector("ul#filters");
-      let count = 0;
+      initSqlJs().then((SQL) => {
+        db = new SQL.Database(new Uint8Array(data));
 
-      tablesDiv = document.querySelector("div#tables");
+        document.querySelector("#count").innerText = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
 
-      let order = JSON.parse(data.files["order.json"].content);
-      for (let list of Object.keys(order)) {
-        tables[list] = document.createElement("details");
-        db[list] = JSON.parse(data.files[order[list]].content);
-        count += db[list].length;
-      }
+        let filters = document.querySelector("#filters");
 
-      document.getElementById("count").innerText = count;
+        const makeCheckbox = (val) => {
+          let box = document.createElement("input");
+          box.type = "checkbox";
+          box.value = val;
+          box.onclick = filter;
+          return box;
+        }
 
-      genTables(1);
+        const makeLi = (label, selector) => {
+          let li = document.createElement("li");
+          li.appendChild(label);
+          filters.querySelector(selector).appendChild(li);
+        }
 
-      allTags = [...allTags].sort((a, b) => {
-        return a.toLowerCase().localeCompare(b.toLowerCase());
+        let types = db.exec("SELECT * FROM types ORDER BY type COLLATE NOCASE");
+        if (types[0]) {
+          types[0].values.forEach((type) => {
+            let box = makeCheckbox(type[0]);
+
+            let label = document.createElement("label");
+            label.innerText = type[1];
+            label.prepend(box);
+
+            makeLi(label, "#types");
+          });
+        }
+
+        let languages = db.exec("SELECT DISTINCT lang FROM langs ORDER BY lang COLLATE NOCASE");
+        if (languages[0]) {
+          languages[0].values.forEach((lang) => {
+            let box = makeCheckbox('"' + lang[0] + '"');
+
+            let label = document.createElement("label");
+            label.innerText = lang[0];
+            label.prepend(box);
+
+            makeLi(label, "#languages");
+          });
+        }
+
+        let tags = db.exec("SELECT * FROM tags ORDER BY tag COLLATE NOCASE");
+        if (tags[0]) {
+          let tagsDiv = filters.querySelector("#tags");
+          tags[0].values.forEach((tag) => {
+            let box = makeCheckbox(tag[0]);
+            box.id = "tag_" + tag[1];
+
+            let label = document.createElement("label");
+            label.innerText = tag[1];
+            label.setAttribute("for", box.id);
+
+            tagsDiv.appendChild(box);
+            tagsDiv.appendChild(label);
+          });
+        }
+
+        genTable();
       });
-
-      for (let tag of allTags) {
-        let box = document.createElement("input");
-        box.type = "checkbox";
-        box.value = tag;
-        box.onclick = filterByTags;
-
-        let label = document.createElement("label");
-        label.innerText = tag;
-        label.prepend(box);
-
-        let li = document.createElement("li");
-        li.appendChild(label);
-
-        filters.appendChild(li);
-      }
-
-      nodes = Array.prototype.slice.call(document.querySelectorAll("details:not(.filtering)"));
-
     });
-}
-
-function collapse() {
-  nodes.forEach((x) => x.removeAttribute("open"));
-}
-
-function expand() {
-  nodes.forEach(x => x.setAttribute("open", ""));
 }

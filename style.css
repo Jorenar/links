@@ -7,8 +7,7 @@ body {
   font-family: monospace;
 }
 
-a,
-a:visited {
+a, a:visited {
   text-decoration: none;
   color: #9d959d;
 }
@@ -17,58 +16,84 @@ a:hover {
   color: white;
 }
 
-main {
-  margin-top: initial;
+a img:hover {
+  filter: brightness(0.7);
 }
 
 header {
+  margin-top: 0.5em;
   margin-bottom: 1em;
-}
-
-ul {
-  column-width: calc(100vw / 6 + 10ch);
-  list-style-type: none;
-}
-
-tr,
-td,
-th {
-  padding: 0.5em;
-  border: 1px solid #ddd;
 }
 
 details {
   margin-bottom: 1em;
 }
 
-summary {
-  cursor: pointer;
+#filters {
+  padding: 20px;
+  background-color: #222;
+  margin-bottom: 1em;
 }
 
-.filtering summary {
+#filters #search {
+  width: 100%;
+}
+
+#filters > div > * {
+  display: table-cell;
+}
+
+#filters #types {
+  min-width: max-content;
+}
+
+#filters #tagsContainer {
+  padding-left: 30px;
+}
+
+#filters #tags {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-td.name,
-td.tags {
-  width: 40em;
+#filters #tags input {
+  display: none;
 }
 
-td.desc {
-  width: calc(100vw - 85em);
+#filters #tags label {
+  margin: 10px;
+  padding: 0.3em;
+  border: 1px white solid;
 }
 
-#tables summary {
-  font-size: 1.2em;
-  margin-bottom: 0.3em;
+#filters #tags input:checked + label {
+  background-color: #ddd;
+  color: black;
+}
+
+#filters ul {
+  list-style-type: none;
 }
 
 table {
   border-collapse: collapse;
-  display: inline-table;
+  width: 100%;
+}
+
+tr, td, th {
+  padding: 0.5em;
+  border: 1px solid #ddd;
 }
 
 thead {
-  background-color: var(--bg2);
+  background-color: #111;
+}
+
+th[data-sorted-direction="ascending"]:after {
+  content: "\25b2";
+}
+
+th[data-sorted-direction="descending"]:after {
+  content: "\25bc";
 }
