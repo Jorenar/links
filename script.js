@@ -85,7 +85,7 @@ function init() {
   fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db")
     .then((response) => response.arrayBuffer())
     .then((data) => {
-      initSqlJs().then((SQL) => {
+      initSqlJs({ locateFile: file => `dist/${file}` }).then((SQL) => {
         db = new SQL.Database(new Uint8Array(data));
 
         document.querySelector("#count").innerText = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
