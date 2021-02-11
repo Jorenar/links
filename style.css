@@ -90,10 +90,10 @@ thead {
   background-color: #111;
 }
 
-th[data-sorted-direction="ascending"]:after {
+th[data-sorted-direction="ascending"]::after {
   content: "\25b2";
 }
 
-th[data-sorted-direction="descending"]:after {
+th[data-sorted-direction="descending"]::after {
   content: "\25bc";
 }

@@ -1,35 +1,35 @@
 var db;
 
 function genTable(filters = {}) {
-  let query = "SELECT * FROM links"
+  let query = "SELECT * FROM links";
 
   let n = Object.entries(filters).reduce((c, a) => c + (a[1].length > 0), 0);
-  n -= (filters.text && filters.text[0] == "");
+  n -= (filters.text && filters.text[0] === "");
 
   if (n) {
     query += " WHERE";
 
-    const append = (sql) => { query += sql + (--n ? " AND " : "") };
+    const append = (sql) => { query += sql + (--n ? " AND " : ""); };
 
-    if (filters.text[0] != "") {
+    if (filters.text[0] !== "") {
       let text = filters.text[0].replaceAll("'", "''");
       append(" (title LIKE '%" + text + "%' OR description LIKE '%" + text + "%')");
     }
 
     if (filters.types.length) {
-      append(" typeID IN (" + filters.types.join(',') + ")");
+      append(" typeID IN (" + filters.types.join(",") + ")");
     }
 
     if (filters.languages.length) {
       append(` id IN (SELECT linkID FROM langs
-                      WHERE lang IN (` + filters.languages.join(',') + `))`);
+                      WHERE lang IN (` + filters.languages.join(",") + "))");
     }
 
     if (filters.tags.length) {
       append(` id IN (SELECT linkID FROM taggings
-                      WHERE tagID IN (` + filters.tags.join(',') + `)
+                      WHERE tagID IN (` + filters.tags.join(",") + `)
                       GROUP BY linkID
-                      HAVING(COUNT(*) >= ` + filters.tags.length + `))`);
+                      HAVING(COUNT(*) >= ` + filters.tags.length + "))");
     }
   }
   query += " ORDER BY title COLLATE NOCASE";
@@ -74,7 +74,7 @@ function filter() {
     return Array.from(bar).filter(x => x.checked).map(x => x.value);
   };
   genTable({
-    text: [ document.querySelector('#search').value.toLowerCase() ],
+    text: [ document.querySelector("#search").value.toLowerCase() ],
     types: checked("#types"),
     languages: checked("#languages"),
     tags: checked("#tags"),
@@ -85,7 +85,7 @@ function init() {
   fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db")
     .then((response) => response.arrayBuffer())
     .then((data) => {
-      initSqlJs({ locateFile: file => `/dist/${file}` }).then((SQL) => {
+      initSqlJs({ locateFile: (file) => `/dist/${file}` }).then((SQL) => {
         db = new SQL.Database(new Uint8Array(data));
 
         document.querySelector("#count").innerText = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
@@ -98,13 +98,13 @@ function init() {
           box.value = val;
           box.onclick = filter;
           return box;
-        }
+        };
 
         const makeLi = (label, selector) => {
           let li = document.createElement("li");
           li.appendChild(label);
           filters.querySelector(selector).appendChild(li);
-        }
+        };
 
         let types = db.exec("SELECT * FROM types ORDER BY type COLLATE NOCASE");
         if (types[0]) {
