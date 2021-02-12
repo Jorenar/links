@@ -53,17 +53,29 @@ function genTable(filters = {}) {
     let langs = db.exec("SELECT lang FROM langs WHERE linkID = " + link[0]);
 
     let r = table.insertRow();
-    let row = r.insertCell.bind(r);
+    var newCell = r.insertCell.bind(r);
 
     let url = document.createElement("a");
     url.setAttribute("href", link[2]);
     url.innerText = link[1];
-    row().appendChild(url);
+    newCell().appendChild(url);
 
-    /* type */        row().innerText = type[0]  ? type[0].values[0][1] : "";
-    /* tags */        row().innerText = tags[0]  ? tags[0].values.map(x => x[0]).join(", ") : "";
-    /* language */    row().innerText = langs[0] ? langs[0].values.map(x => x[0]).join(", ") : "";
-    /* description */ row().innerText = link[3];
+    const token = (arr) => {
+      let c = newCell();
+      if (arr[0]) {
+        arr[0].values.forEach((x) => {
+          let t = document.createElement("span");
+          t.className = "token";
+          t.innerText = x[0];
+          c.appendChild(t);
+        });
+      }
+    };
+
+    /* type */        newCell().innerText = type[0] ? type[0].values[0][1] : "";
+    /* tags */        token(tags);
+    /* language */    token(langs);
+    /* description */ newCell().innerText = link[3];
 
   });
 }

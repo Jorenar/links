@@ -97,3 +97,13 @@ th[data-sorted-direction="ascending"]::after {
 th[data-sorted-direction="descending"]::after {
   content: "\25bc";
 }
+
+table span.token {
+  background-color: #222;
+  padding: 0.1em;
+  margin-right: 0.3em;
+}
+
+th, summary {
+  cursor: pointer;
+}
