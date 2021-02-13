@@ -13,13 +13,16 @@ with open("entry.json") as f:
     entry = json.load(f)
 
 type = entry["type"]
-c.execute("SELECT id FROM types WHERE type = ?", (type,))
-type_id = c.fetchone()
-if type_id is None:
-    c.execute("INSERT INTO types (type) VALUES (?)", (type,))
+if type == "":
+    type_id = None
+else:
     c.execute("SELECT id FROM types WHERE type = ?", (type,))
     type_id = c.fetchone()
-type_id = type_id[0]
+    if type_id is None:
+        c.execute("INSERT INTO types (type) VALUES (?)", (type,))
+        c.execute("SELECT id FROM types WHERE type = ?", (type,))
+        type_id = c.fetchone()
+    type_id = type_id[0]
 
 c.execute("INSERT INTO links (title, url, description, typeID) VALUES (?,?,?,?)",
         (entry["title"], entry["url"], entry["desc"], type_id))
