@@ -97,7 +97,7 @@ function init() {
   fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db")
     .then((response) => response.arrayBuffer())
     .then((data) => {
-      initSqlJs({ locateFile: (file) => `/dist/${file}` }).then((SQL) => {
+      initSqlJs({ locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/${file}` }).then((SQL) => {
         db = new SQL.Database(new Uint8Array(data));
 
         document.querySelector("#count").innerText = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
