@@ -1,11 +1,45 @@
 var db;
 
-function genTable(filters = {}) {
-  let query = "SELECT * FROM links";
+function genTableRow(table, link) {
+  const { [0]: id, [1]: title, [2]: url, [3]: desc, [4]: typeID } = link;
 
+  let type = db.exec(`SELECT type FROM types WHERE id = ${typeID}`);
+
+  let tags = db.exec(`SELECT tag FROM tags
+                      JOIN taggings ON taggings.tagID = tags.id
+                      WHERE taggings.linkID = ${id};`);
+
+  let langs = db.exec(`SELECT lang FROM langs WHERE linkID = ${id};`);
+
+  let r = table.insertRow();
+  const newCell = r.insertCell.bind(r);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.textContent = title;
+  newCell().appendChild(a);
+
+  const tokenize = (arr) => {
+    let c = newCell();
+    arr[0]?.values.forEach((x) => {
+      let t = document.createElement("span");
+      t.className = "token";
+      t.textContent = x[0];
+      c.appendChild(t);
+    });
+  };
+
+  /* type */        newCell().textContent = type[0]?.values[0][0] || "";
+  /* tags */        tokenize(tags);
+  /* language */    tokenize(langs);
+  /* description */ newCell().textContent = desc;
+}
+
+function genTable(filters = {}) {
   let n = Object.entries(filters).reduce((c, a) => c + (a[1].length > 0), 0);
   n -= (filters.text && filters.text[0] === ""); // count of types of applied filters
 
+  let query = "SELECT id, title, url, description, typeID FROM links";
   if (n) {
     query += " WHERE";
 
@@ -24,13 +58,13 @@ function genTable(filters = {}) {
 
     if (languages.length) {
       append(` id IN (SELECT linkID FROM langs
-                      WHERE lang IN (` + languages.join(",") + "))");
+        WHERE lang IN (` + languages.join(",") + "))");
     }
 
     if (tags.length) {
       append(` id IN (SELECT linkID FROM taggings
                       WHERE tagID IN (` + tags.join(",") + `)
-                      GROUP BY linkID
+      GROUP BY linkID
                       HAVING(COUNT(*) >= ` + tags.length + "))");
     }
   }
@@ -39,47 +73,15 @@ function genTable(filters = {}) {
   let contents = db.exec(query);
 
   let table = document.querySelector("tbody");
-  table.innerHTML = "";
+  table.textContent = "";
 
-  contents[0]?.values.forEach((link) => {
-    let type = db.exec("SELECT * FROM types WHERE id = " + link[4]);
-
-    let tags = db.exec(`SELECT tag FROM tags
-                        JOIN taggings ON taggings.tagID = tags.id
-                        WHERE taggings.linkID = ` + link[0]);
-
-    let langs = db.exec("SELECT lang FROM langs WHERE linkID = " + link[0]);
-
-    let r = table.insertRow();
-    const newCell = r.insertCell.bind(r);
-
-    let url = document.createElement("a");
-    url.setAttribute("href", link[2]);
-    url.innerText = link[1];
-    newCell().appendChild(url);
-
-    const token = (arr) => {
-      let c = newCell();
-      arr[0]?.values.forEach((x) => {
-        let t = document.createElement("span");
-        t.className = "token";
-        t.innerText = x[0];
-        c.appendChild(t);
-      });
-    };
-
-    /* type */        newCell().innerText = type[0]?.values[0][1] || "";
-    /* tags */        token(tags);
-    /* language */    token(langs);
-    /* description */ newCell().innerText = link[3];
-
-  });
+  contents[0]?.values.forEach((l) => genTableRow(table, l));
 }
 
 function filter() {
   const checked = (selector) => {
     let c = document.querySelectorAll("#filters " + selector + " input");
-    return Array.from(c).filter(x => x.checked).map(x => x.value);
+    return Array.from(c).filter((x) => x.checked).map((x) => x.value);
   };
   genTable({
     text: [ document.querySelector("#search").value.toLowerCase() ],
@@ -90,13 +92,13 @@ function filter() {
 }
 
 async function init() {
-  const response = await fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db")
+  const response = await fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db");
   const data = await response.arrayBuffer();
   const SQL = await initSqlJs({ locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${file}` });
 
   db = new SQL.Database(new Uint8Array(data));
 
-  document.querySelector("#count").innerText = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
+  document.querySelector("#count").textContent = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
 
   let filters = document.querySelector("#filters");
 
@@ -114,42 +116,41 @@ async function init() {
       .appendChild(label);
   };
 
-  const mkFilters = (query, selector, col) => {
-    let rows = db.exec(query);
-    let languageNames = new Intl.DisplayNames(['en'], {type: 'language'});
-    rows[0]?.values.forEach((row) => {
-      let box = makeCheckbox(row[0]);
+  const makeFilters = (rows, selector, col) => {
+    if (selector === "#languages") {
+      let ln = new Intl.DisplayNames(["en"], {type: "language"});
+      var foo = ln.of.bind(ln);
+    } else {
+      var foo = (x) => x;
+    }
 
+    rows[0]?.values?.forEach((row) => {
       let label = document.createElement("label");
-      if (col == 0) {
-        label.innerText = languageNames.of(row[col]);
-      } else {
-        label.innerText = row[col];
-      }
-      label.prepend(box);
-
+      label.textContent = foo(row[col]);
+      label.prepend(makeCheckbox(row[0]));
       makeLi(label, selector);
     });
-  }
+  };
 
-  mkFilters("SELECT DISTINCT    * FROM types ORDER BY type COLLATE NOCASE", "#types",     1);
-  mkFilters("SELECT DISTINCT lang FROM langs ORDER BY lang COLLATE NOCASE", "#languages", 0);
+  const getRows = (s,t,o) => db.exec(`SELECT DISTINCT ${s} FROM ${t}
+                                      ORDER BY ${o} COLLATE NOCASE`);
 
-  let tags = db.exec("SELECT * FROM tags ORDER BY tag COLLATE NOCASE");
-  if (tags[0]) {
-    let tagsDiv = filters.querySelector("#tags");
-    tags[0].values.forEach((tag) => {
-      let box = makeCheckbox(tag[0]);
-      box.id = "tag_" + tag[1];
+  makeFilters(getRows(   "*", "types", "type"), "#types",     1);
+  makeFilters(getRows("lang", "langs", "lang"), "#languages", 0);
 
-      let label = document.createElement("label");
-      label.innerText = tag[1];
-      label.setAttribute("for", box.id);
+  let tags = getRows("*", "tags", "tag");
+  let tagsDiv = filters.querySelector("#tags");
+  tags[0]?.values.forEach((tag) => {
+    let box = makeCheckbox(tag[0]);
+    box.id = "tag_" + tag[1];
 
-      tagsDiv.appendChild(box);
-      tagsDiv.appendChild(label);
-    });
-  }
+    let label = document.createElement("label");
+    label.textContent = tag[1];
+    label.setAttribute("for", box.id);
+
+    tagsDiv.appendChild(box);
+    tagsDiv.appendChild(label);
+  });
 
   genTable();
 }

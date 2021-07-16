@@ -1,15 +1,13 @@
 body {
-  margin-top: 0;
-  text-align: initial;
-  font-size: 1.5em;
   background-color: black;
   color: #ddd;
   font-family: monospace;
+  font-size: 1.5em;
 }
 
 a, a:visited {
-  text-decoration: none;
   color: #9d959d;
+  text-decoration: none;
 }
 
 a:hover {
@@ -81,8 +79,8 @@ table {
 }
 
 tr, td, th {
-  padding: 0.5em;
   border: 1px solid #ddd;
+  padding: 0.5em;
 }
 
 thead {
@@ -99,18 +97,17 @@ th[data-sorted-direction="descending"]::after {
 
 table span.token {
   background-color: #222;
-  padding: 0.1em;
   margin-right: 0.3em;
+  padding: 0.1em;
 }
 
 th, summary {
   cursor: pointer;
 }
 
-
 @media only screen and (max-width: 700px) {
   #filters > div > * {
-    display: initial !important;
+    display: initial;
   }
 
   th, td:not(:first-of-type) {
