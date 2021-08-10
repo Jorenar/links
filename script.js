@@ -105,7 +105,7 @@ async function init() {
   const makeCheckbox = (val) => {
     let box = document.createElement("input");
     box.type = "checkbox";
-    box.value = val;
+    box.value = `"${val}"`;
     box.onclick = filter;
     return box;
   };
