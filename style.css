@@ -73,6 +73,10 @@ details {
   list-style-type: none;
 }
 
+#filters #languages li {
+  width: max-content;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
