@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Go by Example",
+    "url":   "https://gobyexample.com/",
     "desc":  "",
-    "langs": [],
-    "type":  "",
-    "tags":  []
+    "langs": ["en"],
+    "type":  "Tutorial, guide, manual",
+    "tags":  ["programming", "Go"]
   }
 ]
