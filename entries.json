@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Shooting yourself in the foot in various programming languages",
+    "url":   "http://www.toodarkpark.org/computers/humor/shoot-self-in-foot.html",
     "desc":  "",
-    "langs": [],
-    "type":  "",
-    "tags":  []
+    "langs": ["en"],
+    "type":  "Article, post",
+    "tags":  ["programming", "humor"]
   }
 ]
