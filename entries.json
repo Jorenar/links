@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Computational Complexity: A Modern Approach",
+    "url":   "https://theory.cs.princeton.edu/complexity/book.pdf",
     "desc":  "",
-    "langs": [],
-    "type":  "",
-    "tags":  []
+    "langs": ["en"],
+    "type":  "Book",
+    "tags":  ["computer science", "complexity", "algorithms"]
   }
 ]
