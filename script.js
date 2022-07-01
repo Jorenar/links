@@ -152,5 +152,9 @@ async function init() {
     tagsDiv.appendChild(label);
   });
 
-  genTable();
+  if (window.location.search) {
+    document.querySelector("#search").value = window.location.search.substring(1);
+  }
+
+  filter(); // generate table
 }
