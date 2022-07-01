@@ -3,26 +3,26 @@ var db;
 function genTableRow(table, link) {
   const { [0]: id, [1]: title, [2]: url, [3]: desc, [4]: typeID } = link;
 
-  let type = db.exec(`SELECT type FROM types WHERE id = ${typeID}`);
+  const type = db.exec(`SELECT type FROM types WHERE id = ${typeID}`);
 
-  let tags = db.exec(`SELECT tag FROM tags
-                      JOIN taggings ON taggings.tagID = tags.id
-                      WHERE taggings.linkID = ${id};`);
+  const tags = db.exec(`SELECT tag FROM tags
+                        JOIN taggings ON taggings.tagID = tags.id
+                        WHERE taggings.linkID = ${id};`);
 
-  let langs = db.exec(`SELECT lang FROM langs WHERE linkID = ${id};`);
+  const langs = db.exec(`SELECT lang FROM langs WHERE linkID = ${id};`);
 
-  let r = table.insertRow();
+  const r = table.insertRow();
   const newCell = r.insertCell.bind(r);
 
-  let a = document.createElement("a");
+  const a = document.createElement("a");
   a.href = url;
   a.textContent = title;
   newCell().appendChild(a);
 
   const tokenize = (arr) => {
-    let c = newCell();
+    const c = newCell();
     arr[0]?.values.forEach((x) => {
-      let t = document.createElement("span");
+      const t = document.createElement("span");
       t.className = "token";
       t.textContent = x[0];
       c.appendChild(t);
@@ -48,7 +48,7 @@ function genTable(filters = {}) {
     const { text, types, languages, tags } = filters;
 
     if (text[0] !== "") {
-      let txt = text[0].replaceAll("'", "''");
+      const txt = text[0].replaceAll("'", "''");
       append(" (title LIKE '%" + txt + "%' OR description LIKE '%" + txt + "%')");
     }
 
@@ -58,21 +58,21 @@ function genTable(filters = {}) {
 
     if (languages.length) {
       append(` id IN (SELECT linkID FROM langs
-        WHERE lang IN (` + languages.join(",") + "))");
+                      WHERE lang IN (` + languages.join(",") + "))");
     }
 
     if (tags.length) {
       append(` id IN (SELECT linkID FROM taggings
                       WHERE tagID IN (` + tags.join(",") + `)
-      GROUP BY linkID
+                      GROUP BY linkID
                       HAVING(COUNT(*) >= ` + tags.length + "))");
     }
   }
   query += " ORDER BY title COLLATE NOCASE";
 
-  let contents = db.exec(query);
+  const contents = db.exec(query);
 
-  let table = document.querySelector("tbody");
+  const table = document.querySelector("tbody");
   table.textContent = "";
 
   contents[0]?.values.forEach((l) => genTableRow(table, l));
@@ -80,7 +80,7 @@ function genTable(filters = {}) {
 
 function filter() {
   const checked = (selector) => {
-    let c = document.querySelectorAll("#filters " + selector + " input");
+    const c = document.querySelectorAll("#filters " + selector + " input");
     return Array.from(c).filter((x) => x.checked).map((x) => x.value);
   };
   genTable({
@@ -100,10 +100,10 @@ async function init() {
 
   document.querySelector("#count").textContent = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
 
-  let filters = document.querySelector("#filters");
+  const filters = document.querySelector("#filters");
 
   const makeCheckbox = (val) => {
-    let box = document.createElement("input");
+    const box = document.createElement("input");
     box.type = "checkbox";
     box.value = `"${val}"`;
     box.onclick = filter;
@@ -118,14 +118,14 @@ async function init() {
 
   const makeFilters = (rows, selector, col) => {
     if (selector === "#languages") {
-      let ln = new Intl.DisplayNames(["en"], {type: "language"});
+      const ln = new Intl.DisplayNames(["en"], {type: "language"});
       var foo = ln.of.bind(ln);
     } else {
       var foo = (x) => x;
     }
 
     rows[0]?.values?.forEach((row) => {
-      let label = document.createElement("label");
+      const label = document.createElement("label");
       label.textContent = foo(row[col]);
       label.prepend(makeCheckbox(row[0]));
       makeLi(label, selector);
@@ -138,13 +138,13 @@ async function init() {
   makeFilters(getRows(   "*", "types", "type"), "#types",     1);
   makeFilters(getRows("lang", "langs", "lang"), "#languages", 0);
 
-  let tags = getRows("*", "tags", "tag");
-  let tagsDiv = filters.querySelector("#tags");
+  const tags = getRows("*", "tags", "tag");
+  const tagsDiv = filters.querySelector("#tags");
   tags[0]?.values.forEach((tag) => {
-    let box = makeCheckbox(tag[0]);
+    const box = makeCheckbox(tag[0]);
     box.id = "tag_" + tag[1];
 
-    let label = document.createElement("label");
+    const label = document.createElement("label");
     label.textContent = tag[1];
     label.setAttribute("for", box.id);
 
