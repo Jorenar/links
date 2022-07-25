@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Useful Forks",
+    "url":   "https://useful-forks.github.io/",
     "desc":  "",
-    "langs": [],
-    "type":  "",
-    "tags":  []
+    "langs": ["en"],
+    "type":  "Tool/service",
+    "tags":  ["software engineering", "Git"]
   }
 ]
