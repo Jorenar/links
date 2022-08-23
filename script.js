@@ -19,19 +19,20 @@ function genTableRow(table, link) {
   a.textContent = title;
   newCell().appendChild(a);
 
-  const tokenize = (arr) => {
+  const tokenize = (tokens) => {
     const c = newCell();
-    arr[0]?.values.forEach((x) => {
-      const t = document.createElement("span");
-      t.className = "token";
-      t.textContent = x[0];
-      c.appendChild(t);
+    Object.keys(tokens).forEach((cl) => {
+      tokens[cl][0]?.values.forEach((x) => {
+        const t = document.createElement("span");
+        t.className = `token ${cl}`;
+        t.textContent = x[0];
+        c.appendChild(t);
+      });
     });
   };
 
-  /* type */        newCell().textContent = type[0]?.values[0][0] || "";
-  /* tags */        tokenize(tags);
-  /* language */    tokenize(langs);
+  /* type + tags */ tokenize({ "type": type, "tag": tags });
+  /* language */    tokenize({ "lang": langs });
   /* description */ newCell().textContent = desc;
 }
 
@@ -116,41 +117,35 @@ async function init() {
       .appendChild(label);
   };
 
-  const makeFilters = (rows, selector, col) => {
-    if (selector === "#languages") {
-      const ln = new Intl.DisplayNames(["en"], {type: "language"});
-      var foo = ln.of.bind(ln);
-    } else {
-      var foo = (x) => x;
-    }
-
-    rows[0]?.values?.forEach((row) => {
-      const label = document.createElement("label");
-      label.textContent = foo(row[col]);
-      label.prepend(makeCheckbox(row[0]));
-      makeLi(label, selector);
-    });
-  };
-
   const getRows = (s,t,o) => db.exec(`SELECT DISTINCT ${s} FROM ${t}
                                       ORDER BY ${o} COLLATE NOCASE`);
 
-  makeFilters(getRows(   "*", "types", "type"), "#types",     1);
-  makeFilters(getRows("lang", "langs", "lang"), "#languages", 0);
-
-  const tags = getRows("*", "tags", "tag");
-  const tagsDiv = filters.querySelector("#tags");
-  tags[0]?.values.forEach((tag) => {
-    const box = makeCheckbox(tag[0]);
-    box.id = "tag_" + tag[1];
-
+  const langs = getRows("lang", "langs", "lang");
+  const ln = new Intl.DisplayNames(["en"], {type: "language"});
+  langs[0]?.values?.forEach((row) => {
     const label = document.createElement("label");
-    label.textContent = tag[1];
-    label.setAttribute("for", box.id);
-
-    tagsDiv.appendChild(box);
-    tagsDiv.appendChild(label);
+    label.textContent = ln.of(row[0]);
+    label.prepend(makeCheckbox(row[0]));
+    makeLi(label, "#languages");
   });
+
+  const makeTags = (rows, selector) => {
+    const tagsDiv = filters.querySelector(selector);
+    rows[0]?.values.forEach((t) => {
+      const box = makeCheckbox(t[0]);
+      box.id = t[1];
+
+      const label = document.createElement("label");
+      label.textContent = t[1];
+      label.setAttribute("for", box.id);
+
+      tagsDiv.appendChild(box);
+      tagsDiv.appendChild(label);
+    });
+  }
+
+  makeTags(getRows("*", "types", "type"), "#types");
+  makeTags(getRows("*", "tags", "tag"), "#tags");
 
   if (window.location.search) {
     document.querySelector("#search").value = window.location.search.substring(1);

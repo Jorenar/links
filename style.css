@@ -35,36 +35,33 @@ details {
 
 #filters #search {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 #filters > div > * {
   display: table-cell;
 }
 
-#filters #types {
-  min-width: max-content;
-}
-
 #filters #tagsContainer {
   padding-left: 30px;
 }
 
-#filters #tags {
+#filters .tags {
   display: flex;
   flex-wrap: wrap;
 }
 
-#filters #tags input {
+#filters .tags input {
   display: none;
 }
 
-#filters #tags label {
-  margin: 10px;
+#filters .tags label {
+  margin: 6px;
   padding: 0.3em;
   border: 1px white solid;
 }
 
-#filters #tags input:checked + label {
+#filters .tags input:checked + label {
   background-color: #ddd;
   color: black;
 }
@@ -101,8 +98,13 @@ th[data-sorted-direction="descending"]::after {
 
 table span.token {
   background-color: #222;
-  margin-right: 0.3em;
-  padding: 0.1em;
+  display: inline-block;
+  margin: 5px;
+  padding: 3px;
+}
+
+table span.token.type {
+  font-style: italic;
 }
 
 th, summary {

@@ -26,21 +26,19 @@
       <div id="filters">
         <input id="search" onkeyup="filter()" type="text" placeholder="Search...">
         <div>
-          <ul id="types"><h3>Types</h3></ul>
-          <ul id="languages"><h3>Languages</h3></ul>
+          <ul id="languages"></ul>
           <div id="tagsContainer">
-            <h3>Tags</h3>
-            <div id="tags"></div>
+            <div class="tags" id="types"></div>
+            <hr>
+            <div class="tags" id="tags"></div>
           </div>
         </div>
-        <sub><sub> <i>Types</i> and <i>Languages</i> work like union, <i>Tags</i> like intersection </sub></sub>
       </div>
     </details>
     <table data-sortable>
       <thead>
         <tr>
           <th data-sorted-direction="ascending"> Link </th>
-          <th> Type </th>
           <th> Tags </th>
           <th> Lang </th>
           <th> Description </th>
