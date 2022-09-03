@@ -1,34 +1,10 @@
 [
   {
-    "title": "Zapach papieru",
-    "url":   "https://zapach-papieru.pl",
-    "desc":  "Strona fanów prasy o grach",
-    "langs": ["pl"],
-    "type":  "Webportal, website",
-    "tags":  ["gaming", "press", "retro"]
-  },
-  {
-    "title": "strefapsx.pl",
-    "url":   "https://strefapsx.pl",
+    "title": "",
+    "url":   "",
     "desc":  "",
-    "langs": ["pl"],
+    "langs": [],
     "type":  "",
-    "tags":  ["gaming"]
-  },
-  {
-    "title": "Text to ASCII Art Generator (TAAG)",
-    "url":   "http://www.patorjk.com/software/taag",
-    "desc":  "",
-    "langs": ["en"],
-    "type":  "Tool/service",
-    "tags":  ["UI/UX"]
-  },
-  {
-    "title": "Retro Redrawn",
-    "url":   "https://retroredrawn.com",
-    "desc":  "Pixel-art remakes and demakes of game graphics",
-    "langs": ["en"],
-    "type":  "Gallery",
-    "tags":  ["gaming", "art"]
+    "tags":  []
   }
 ]
