@@ -1,26 +1,10 @@
 [
   {
-    "title": "Textik",
-    "url":   "https://textik.com",
-    "desc":  "ASCII diagrams editor",
-    "langs": ["en"],
-    "type":  "Tool/service",
-    "tags":  ["ASCII art"]
-  },
-  {
-    "title": "Diagon",
-    "url":   "https://arthursonzogni.com/Diagon/",
-    "desc":  "Interactive ASCII art diagram collection",
-    "langs": ["en"],
-    "type":  "Tool/service",
-    "tags":  ["ASCII art"]
-  },
-  {
-    "title": "PlantText UML Editor",
-    "url":   "https://www.planttext.com/",
+    "title": "",
+    "url":   "",
     "desc":  "",
-    "langs": ["en"],
-    "type":  "Tool/service",
-    "tags":  ["software engineering"]
+    "langs": [],
+    "type":  "",
+    "tags":  []
   }
 ]
