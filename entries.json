@@ -1,10 +1,10 @@
 [
   {
-    "title": "ASCIIFlow",
-    "url":   "https://asciiflow.com/",
+    "title": "",
+    "url":   "",
     "desc":  "",
-    "langs": ["en"],
-    "type":  "Tool/service",
-    "tags":  ["ASCII art"]
+    "langs": [],
+    "type":  "",
+    "tags":  []
   }
 ]
