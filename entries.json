@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Kill the Newsletter!",
+    "url":   "https://kill-the-newsletter.com/",
     "desc":  "",
-    "langs": [],
-    "type":  "",
-    "tags":  []
+    "langs": ["en"],
+    "type":  "Tool/service",
+    "tags":  ["RSS"]
   }
 ]
