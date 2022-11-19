@@ -1,10 +1,10 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Vim King",
+    "url":   "Vim King",
     "desc":  "",
-    "langs": [],
+    "langs": ["en"],
     "type":  "",
-    "tags":  []
+    "tags":  ["Vim"]
   }
 ]
