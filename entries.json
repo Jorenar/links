@@ -1,10 +1,10 @@
 [
   {
-    "title": "C xor C++ Programming",
-    "url":   "https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3065.pdf",
-    "desc":  "\"C++ is not a superset of C\"",
-    "langs": ["en"],
-    "type":  "Document, paper",
-    "tags":  ["C", "C++", "programming"]
+    "title": "",
+    "url":   "",
+    "desc":  "",
+    "langs": [],
+    "type":  "",
+    "tags":  []
   }
 ]
