@@ -1,18 +1,10 @@
 [
   {
-    "title": "MAKEFILE TUTOR (GNU)",
-    "url":   "https://github.com/clemedon/Makefile_tutor",
+    "title": "",
+    "url":   "",
     "desc":  "",
-    "langs": [ "en" ],
-    "type":  "Tutorial, guide, manual",
-    "tags":  [ "software engineering" ]
-  },
-  {
-    "title": "Automatically generate makefile dependencies",
-    "url":   "http://www.microhowto.info/howto/automatically_generate_makefile_dependencies.html",
-    "desc":  "",
-    "langs": [ "en" ],
-    "type":  "Tutorial, guide, manual",
-    "tags":  [ "software engineering" ]
+    "langs": [],
+    "type":  "",
+    "tags":  []
   }
 ]
