@@ -10,40 +10,21 @@
   <link rel="shortcut icon" type="image/png" href="https://jorengarenar.github.io/avatar.svg">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js" integrity="sha512-dsyusvfMidFZ0Vttbk7YXRAxaO++5nU1vuFtGMK2MNPr8qDzz0e5IahYWSJkzZcNXn18E1OHP6Oa13nRIwT0zg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js" integrity="sha512-DEcSaL0BWApJ//v7ZfqAI04nvK+NQcUVwrrx/l1x7OJgU0Cwbq7e459NBMzLPrm8eLPzAwBtiJJS4AvLZDZ8xA==" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </head>
 <body onload="init()">
   <header>
     <b>A list of <span id='count'></span> links to various tools and resources <a href="https://jorengarenar.github.io">Jorengarenar</a> has found on the World Wide Web</b>
-    <a style='float:right' href="https://github.com/Jorengarenar/resources">
-      <img style='width:1.5em; margin:5px' src="https://github.com/fluidicon.png" alt="View on GitHub">
-    </a>
+    <a style='float:right; font-size: 0.7em' href="https://github.com/Jorengarenar/resources">[GitHub]</a>
   </header>
   <main>
-    <details>
+    <input id="search" onkeyup="filter()" type="text" placeholder="Search...">
+    <details id="filters">
       <summary>Filters</summary>
-      <div id="filters">
-        <input id="search" onkeyup="filter()" type="text" placeholder="Search...">
-        <div>
-          <ul id="languages"></ul>
-          <div id="tagsContainer">
-            <div class="tags" id="types"></div>
-            <hr>
-            <div class="tags" id="tags"></div>
-          </div>
-        </div>
-      </div>
+      <div id="tagFilters"></div>
     </details>
+
     <table data-sortable>
-      <thead>
-        <tr>
-          <th data-sorted-direction="ascending"> Link </th>
-          <th> Tags </th>
-          <th> Lang </th>
-          <th> Description </th>
-        </tr>
-      </thead>
       <tbody> </tbody>
     </table>
   </main>

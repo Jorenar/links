@@ -1,39 +1,37 @@
 var db;
 
 function genTableRow(table, link) {
-  const { [0]: id, [1]: title, [2]: url, [3]: desc, [4]: typeID } = link;
+  const { [0]: id, [1]: title, [2]: url, [3]: desc } = link;
 
-  const type = db.exec(`SELECT type FROM types WHERE id = ${typeID}`);
+  const row = table.insertRow().insertCell();
 
+  // the link
+  const a = document.createElement("a");
+  a.href = url;
+  a.textContent = title;
+  row.appendChild(a);
+
+  // description
+  if (desc) {
+    descDiv = document.createElement("div");
+    descDiv.className = "desc";
+    descDiv.textContent = desc;
+    row.appendChild(descDiv);
+  }
+
+  // tags
   const tags = db.exec(`SELECT tag FROM tags
                         JOIN taggings ON taggings.tagID = tags.id
                         WHERE taggings.linkID = ${id};`);
 
-  const langs = db.exec(`SELECT lang FROM langs WHERE linkID = ${id};`);
-
-  const r = table.insertRow();
-  const newCell = r.insertCell.bind(r);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.textContent = title;
-  newCell().appendChild(a);
-
-  const tokenize = (tokens) => {
-    const c = newCell();
-    Object.keys(tokens).forEach((cl) => {
-      tokens[cl][0]?.values.forEach((x) => {
-        const t = document.createElement("span");
-        t.className = `token ${cl}`;
-        t.textContent = x[0];
-        c.appendChild(t);
-      });
-    });
-  };
-
-  /* type + tags */ tokenize({ "type": type, "tag": tags });
-  /* language */    tokenize({ "lang": langs });
-  /* description */ newCell().textContent = desc;
+  const tagsDiv = document.createElement("span");
+  tagsDiv.className = "tags";
+  tags[0]?.values.forEach((x) => {
+    const t = document.createElement("span");
+    t.textContent = x[0];
+    tagsDiv.appendChild(t);
+  });
+  row.prepend(tagsDiv);
 }
 
 function genTable(filters = {}) {
@@ -46,20 +44,11 @@ function genTable(filters = {}) {
 
     const append = (sql) => { query += sql + (--n ? " AND " : ""); };
 
-    const { text, types, languages, tags } = filters;
+    const { text, tags } = filters;
 
     if (text[0] !== "") {
       const txt = text[0].replaceAll("'", "''");
       append(" (title LIKE '%" + txt + "%' OR description LIKE '%" + txt + "%')");
-    }
-
-    if (types.length) {
-      append(" typeID IN (" + types.join(",") + ")");
-    }
-
-    if (languages.length) {
-      append(` id IN (SELECT linkID FROM langs
-                      WHERE lang IN (` + languages.join(",") + "))");
     }
 
     if (tags.length) {
@@ -80,15 +69,9 @@ function genTable(filters = {}) {
 }
 
 function filter() {
-  const checked = (selector) => {
-    const c = document.querySelectorAll("#filters " + selector + " input");
-    return Array.from(c).filter((x) => x.checked).map((x) => x.value);
-  };
   genTable({
     text: [ document.querySelector("#search").value.toLowerCase() ],
-    types: checked("#types"),
-    languages: checked("#languages"),
-    tags: checked("#tags"),
+    tags: Array.from(document.querySelectorAll("#tagFilters input")).filter((x) => x.checked).map((x) => x.value)
   });
 }
 
@@ -101,7 +84,6 @@ async function init() {
 
   document.querySelector("#count").textContent = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
 
-  const filters = document.querySelector("#filters");
 
   const makeCheckbox = (val) => {
     const box = document.createElement("input");
@@ -111,41 +93,20 @@ async function init() {
     return box;
   };
 
-  const makeLi = (label, selector) => {
-    filters.querySelector(selector)
-      .appendChild(document.createElement("li"))
-      .appendChild(label);
-  };
+  const tags = db.exec(`SELECT DISTINCT * FROM tags ORDER BY tag COLLATE NOCASE`);
 
-  const getRows = (s,t,o) => db.exec(`SELECT DISTINCT ${s} FROM ${t}
-                                      ORDER BY ${o} COLLATE NOCASE`);
+  const tagsDiv = document.querySelector("#tagFilters");
+  tags[0]?.values.forEach((t) => {
+    const box = makeCheckbox(t[0]);
+    box.id = t[1];
 
-  const langs = getRows("lang", "langs", "lang");
-  const ln = new Intl.DisplayNames(["en"], {type: "language"});
-  langs[0]?.values?.forEach((row) => {
     const label = document.createElement("label");
-    label.textContent = ln.of(row[0]);
-    label.prepend(makeCheckbox(row[0]));
-    makeLi(label, "#languages");
+    label.textContent = t[1];
+    label.setAttribute("for", box.id);
+
+    tagsDiv.appendChild(box);
+    tagsDiv.appendChild(label);
   });
-
-  const makeTags = (rows, selector) => {
-    const tagsDiv = filters.querySelector(selector);
-    rows[0]?.values.forEach((t) => {
-      const box = makeCheckbox(t[0]);
-      box.id = t[1];
-
-      const label = document.createElement("label");
-      label.textContent = t[1];
-      label.setAttribute("for", box.id);
-
-      tagsDiv.appendChild(box);
-      tagsDiv.appendChild(label);
-    });
-  }
-
-  makeTags(getRows("*", "types", "type"), "#types");
-  makeTags(getRows("*", "tags", "tag"), "#tags");
 
   if (window.location.search) {
     document.querySelector("#search").value = window.location.search.substring(1);

@@ -6,7 +6,7 @@ body {
 }
 
 a, a:visited {
-  color: #9d959d;
+  color: #b7b7b7;
   text-decoration: none;
 }
 
@@ -27,51 +27,38 @@ details {
   margin-bottom: 1em;
 }
 
+summary {
+  cursor: pointer;
+}
+
 #filters {
-  padding: 20px;
-  background-color: #222;
   margin-bottom: 1em;
 }
 
-#filters #search {
-  width: 100%;
+#search {
+  float: right;
   margin-bottom: 10px;
 }
 
-#filters > div > * {
-  display: table-cell;
-}
-
-#filters #tagsContainer {
-  padding-left: 30px;
-}
-
-#filters .tags {
+#tagFilters {
   display: flex;
   flex-wrap: wrap;
 }
 
-#filters .tags input {
+#tagFilters [type="checkbox"] {
   display: none;
 }
 
-#filters .tags label {
+#tagFilters label {
+  cursor: pointer;
   margin: 6px;
   padding: 0.3em;
-  border: 1px white solid;
+  border: 1px solid white;
 }
 
-#filters .tags input:checked + label {
+#tagFilters input:checked + label {
   background-color: #ddd;
   color: black;
-}
-
-#filters ul {
-  list-style-type: none;
-}
-
-#filters #languages li {
-  width: max-content;
 }
 
 table {
@@ -80,35 +67,25 @@ table {
 }
 
 tr, td, th {
-  border: 1px solid #ddd;
+  border: 1px solid #222;
   padding: 0.5em;
 }
 
-thead {
-  background-color: #111;
+table .desc {
+  font-size: 0.8em;
+  color: #999;
 }
 
-th[data-sorted-direction="ascending"]::after {
-  content: "\25b2";
+table .tags {
+  float: right;
+  font-size: 0.8em;
 }
 
-th[data-sorted-direction="descending"]::after {
-  content: "\25bc";
-}
-
-table span.token {
-  background-color: #222;
+table .tags span {
+  border: 1px solid #3339;
   display: inline-block;
-  margin: 5px;
+  margin: 0 5px;
   padding: 3px;
-}
-
-table span.token.type {
-  font-style: italic;
-}
-
-th, summary {
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
@@ -116,7 +93,7 @@ th, summary {
     display: initial;
   }
 
-  th, td:not(:first-of-type) {
+  table span.tags {
     display: none;
   }
 }
