@@ -1,8 +1,32 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "The Amiga Museum",
+    "url":   "https://theamigamuseum.com",
     "desc":  "",
-    "tags":  []
+    "tags":  ["Amiga", "retro"]
+  },
+  {
+    "title": "Big Book of Amiga Hardware",
+    "url":   "https://bigbookofamigahardware.com",
+    "desc":  "",
+    "tags":  ["Amiga", "retro"]
+  },
+  {
+    "title": "Aminet",
+    "url":   "https://aminet.net",
+    "desc":  "A set of interconnected WWW and FTP servers hosting freely distributable Amiga software",
+    "tags":  ["Amiga", "retro"]
+  },
+  {
+    "title": "Everything Amiga",
+    "url":   "https://www.everythingamiga.com",
+    "desc":  "",
+    "tags":  ["Amiga", "retro"]
+  },
+  {
+    "title": "Upgrade Amiga 500 rev. 8a board to Amiga 500+",
+    "url":   "https://www.tsb.space/bl0g/upgrade-amiga-500-rev-8a-board-to-amiga-500",
+    "desc":  "",
+    "tags":  ["Amiga", "retro"]
   }
 ]
