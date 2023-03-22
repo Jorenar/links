@@ -1,8 +1,20 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Lemon Amiga",
+    "url":   "https://www.lemonamiga.com",
     "desc":  "",
-    "tags":  []
+    "tags":  [ "Amiga" ]
+  },
+  {
+    "title": "OldGames.sk",
+    "url":   "https://www.oldgames.sk/en",
+    "desc":  "",
+    "tags":  [ "retro", "gaming" ]
+  },
+  {
+    "title": "OpenRetro Game Database",
+    "url":   "https://openretro.org",
+    "desc":  "",
+    "tags":  [ "retro", "gaming" ]
   }
 ]
