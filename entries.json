@@ -1,8 +1,8 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "Writing a Simple Garbage Collector in C",
+    "url":   "https://maplant.com/gc.html",
     "desc":  "",
-    "tags":  []
+    "tags":  ["C"]
   }
 ]
