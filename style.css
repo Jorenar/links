@@ -3,7 +3,8 @@ body {
   color: #ddd;
   font-family: monospace;
   font-size: 1.5em;
-  overflow-y: scroll;
+  max-width: 900px;
+  margin: 10px auto;
 }
 
 a, a:visited {
@@ -15,23 +16,28 @@ a:hover {
   color: white;
 }
 
+header h1 {
+  font-size: inherit;
+  text-align: center;
+}
+
 #search {
+  background: #111;
+  border-color: #4444;
+  color: white;
   float: right;
-  margin: 10px;
+  margin: 0 3px;
 }
 
 table {
-  border-collapse: collapse;
   width: 100%;
 }
 
 tr, td, th {
-  border: 1px solid #222;
-  padding: 0.5em;
+  padding: 0.7em;
 }
 
 table .desc {
   font-size: 0.8em;
   color: #999;
-  float: right;
 }

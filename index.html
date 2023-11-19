@@ -14,10 +14,11 @@
 </head>
 <body onload="init()">
   <header>
-    <a style='float:right; font-size: 0.7em' href="https://github.com/Jorengarenar/links">[GitHub]</a>
-    <b>A list of <span id='count'></span> various links <a href="https://jorengarenar.github.io">Jorengarenar</a> has found on the World Wide Web</b>
+    <h1>A list of <span id='count'></span> various links <a href="https://jorengarenar.github.io">Jorengarenar</a> has found on the World Wide Web</h1>
+    <a style='' href="https://github.com/Jorengarenar/links">[GitHub]</a>
+    <input id="search" onkeyup="genTable()" type="text" placeholder="Search...">
+    <hr>
   </header>
-  <input id="search" onkeyup="genTable()" type="text" placeholder="Search...">
   <main>
     <table>
       <tbody> </tbody>
