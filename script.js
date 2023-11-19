@@ -1,4 +1,4 @@
-var db;
+let db;
 
 function genTable() {
   const table = document.querySelector("tbody");
@@ -32,7 +32,7 @@ function genTable() {
 }
 
 async function init() {
-  const response = await fetch("https://raw.githubusercontent.com/Jorengarenar/resources/database/links.db");
+  const response = await fetch("https://raw.githubusercontent.com/Jorengarenar/links/database/links.db");
   const data = await response.arrayBuffer();
   const SQL = await initSqlJs({ locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${file}` });
 
