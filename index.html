@@ -14,17 +14,12 @@
 </head>
 <body onload="init()">
   <header>
-    <b>A list of <span id='count'></span> links to various tools and resources <a href="https://jorengarenar.github.io">Jorengarenar</a> has found on the World Wide Web</b>
     <a style='float:right; font-size: 0.7em' href="https://github.com/Jorengarenar/resources">[GitHub]</a>
+    <b>A list of <span id='count'></span> links to various tools and resources <a href="https://jorengarenar.github.io">Jorengarenar</a> has found on the World Wide Web</b>
   </header>
+  <input id="search" onkeyup="genTable()" type="text" placeholder="Search...">
   <main>
-    <input id="search" onkeyup="filter()" type="text" placeholder="Search...">
-    <details id="filters">
-      <summary>Filters</summary>
-      <div id="tagFilters"></div>
-    </details>
-
-    <table data-sortable>
+    <table>
       <tbody> </tbody>
     </table>
   </main>

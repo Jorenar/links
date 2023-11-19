@@ -15,51 +15,9 @@ a:hover {
   color: white;
 }
 
-a img:hover {
-  filter: brightness(0.7);
-}
-
-header {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-}
-
-details {
-  margin-bottom: 1em;
-}
-
-summary {
-  cursor: pointer;
-}
-
-#filters {
-  margin-bottom: 1em;
-}
-
 #search {
   float: right;
-  margin-bottom: 10px;
-}
-
-#tagFilters {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#tagFilters [type="checkbox"] {
-  display: none;
-}
-
-#tagFilters label {
-  cursor: pointer;
-  margin: 6px;
-  padding: 0.3em;
-  border: 1px solid white;
-}
-
-#tagFilters input:checked + label {
-  background-color: #ddd;
-  color: black;
+  margin: 10px;
 }
 
 table {
@@ -75,26 +33,5 @@ tr, td, th {
 table .desc {
   font-size: 0.8em;
   color: #999;
-}
-
-table .tags {
   float: right;
-  font-size: 0.8em;
-}
-
-table .tags span {
-  border: 1px solid #3339;
-  display: inline-block;
-  margin: 0 5px;
-  padding: 3px;
-}
-
-@media only screen and (max-width: 700px) {
-  #filters > div > * {
-    display: initial;
-  }
-
-  table span.tags {
-    display: none;
-  }
 }
