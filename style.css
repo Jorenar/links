@@ -3,6 +3,7 @@ body {
   color: #ddd;
   font-family: monospace;
   font-size: 1.5em;
+  overflow-y: scroll;
 }
 
 a, a:visited {
