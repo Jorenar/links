@@ -1,0 +1,22 @@
+name: Update DB
+
+on:
+  push:
+    branches:
+      - database
+    paths:
+      - entries.csv
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Update
+      run: |
+        ./insert.sh links.db links < entries.csv && echo > entries.csv
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Update
+        branch: database
