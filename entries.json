@@ -1,8 +1,62 @@
 [
   {
-    "title": "",
-    "url":   "",
+    "title": "crontab guru",
+    "url":   "https://crontab.guru",
+    "desc":  "Simple editor for cron schedule expressions",
+    "tags":  ["*nix"]
+  },
+  {
+    "title": "Dr Chip's Vim Page",
+    "url":   "http://www.drchip.org/astronaut/vim/index.html",
+    "desc":  "",
+    "tags":  ["Vim"]
+  },
+  {
+    "title": "SailRabbit",
+    "url":   "https://www.sailrabbit.com/bmr/",
+    "desc":  "Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) Calculator",
+    "tags":  []
+  },
+  {
+    "title": "Terms of Service; Didn't Read",
+    "url":   "https://tosdr.org/",
     "desc":  "",
     "tags":  []
+  },
+  {
+    "title": "Backwards Compatibilty Chart",
+    "url":   "https://docs.google.com/spreadsheets/d/13BnuFlQUVbxLMYRO5Ms8TUhbiefmXsUE69OYVwp1mZ0",
+    "desc":  "",
+    "tags":  ["gaming", "retro"]
+  },
+  {
+    "title": "TLD-List",
+    "url":   "https://tld-list.com",
+    "desc":  "Compare prices of all Top-Level Domains",
+    "tags":  ["WebDev"]
+  },
+  {
+    "title": "Snappy Driver Installer Origin",
+    "url":   "https://www.snappy-driver-installer.org/",
+    "desc":  "Portable driver installation and update tool (for old Windows)",
+    "tags":  ["retro"]
+  },
+  {
+    "title": "The SEGA Hardware Database",
+    "url":   "https://hardware.segakore.fr/en/",
+    "desc":  "",
+    "tags":  ["retro", "gaming"]
+  },
+  {
+    "title": "ISO/IEC JTC1/SC22/WG14",
+    "url":   "https://www.open-std.org/JTC1/SC22/WG14/",
+    "desc":  "The international standardization working group for the programming language C",
+    "tags":  ["C", "programming", "standard", "software engineering"]
+  },
+  {
+    "title": "How can I handle command-line options and arguments in my script easily?",
+    "url":   "https://mywiki.wooledge.org/BashFAQ/035",
+    "desc":  "",
+    "tags":  ["shell", "*nix"]
   }
 ]
