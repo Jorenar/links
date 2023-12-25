@@ -6,11 +6,11 @@ function genTable() {
 
   const txt = document.querySelector("#search").value.toLowerCase();
 
-  let query = "SELECT title, url, description FROM links"
-  if (txt != "") {
+  let query = "SELECT title, url, description FROM links";
+  if (txt !== "") {
     query += " WHERE (title LIKE '%" + txt + "%' OR description LIKE '%" + txt + "%')";
   }
-  query += " ORDER BY title COLLATE NOCASE"
+  query += " ORDER BY title COLLATE NOCASE";
 
   const contents = db.exec(query);
 
@@ -24,7 +24,7 @@ function genTable() {
     a.textContent = title;
     row.appendChild(a);
 
-    descDiv = document.createElement("div");
+    const descDiv = document.createElement("div");
     descDiv.className = "desc";
     descDiv.textContent = desc;
     row.appendChild(descDiv);
