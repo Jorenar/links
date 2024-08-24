@@ -1,0 +1,3 @@
+connections:
+  - driver: sqlite3
+    dataSourceName: links.db
