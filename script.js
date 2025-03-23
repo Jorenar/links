@@ -1,4 +1,4 @@
-let db;
+let DB;
 
 function genTable() {
   const table = document.querySelector("tbody");
@@ -12,7 +12,7 @@ function genTable() {
   }
   query += " ORDER BY title COLLATE NOCASE";
 
-  const contents = db.exec(query);
+  const contents = DB.exec(query);
 
   contents[0]?.values.forEach((link) => {
     const { [0]: title, [1]: url, [2]: desc } = link;
@@ -32,13 +32,13 @@ function genTable() {
 }
 
 async function init() {
-  const response = await fetch("https://raw.githubusercontent.com/Jorengarenar/links/database/links.db");
-  const data = await response.arrayBuffer();
+  const links = await fetch("https://raw.githubusercontent.com/Jorengarenar/links/database/links.sql")
   const SQL = await initSqlJs({ locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${file}` });
 
-  db = new SQL.Database(new Uint8Array(data));
+  DB = new SQL.Database();
+  DB.exec(await links.text());
 
-  document.querySelector("#count").textContent = db.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
+  document.querySelector("#count").textContent = DB.exec("SELECT COUNT(*) FROM links")[0].values[0][0];
 
   if (window.location.search) {
     document.querySelector("#search").value = window.location.search.substring(1);
