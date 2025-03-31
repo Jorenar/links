@@ -1,8 +1,8 @@
 let DB;
 
 function genTable() {
-  const table = document.querySelector("tbody");
-  table.textContent = "";
+  const main = document.querySelector("main");
+  main.textContent = "";
 
   const txt = document.querySelector("#search").value.toLowerCase();
 
@@ -17,17 +17,18 @@ function genTable() {
   contents[0]?.values.forEach((link) => {
     const { [0]: title, [1]: url, [2]: desc } = link;
 
-    const row = table.insertRow().insertCell();
+    const linkDiv = document.createElement("div");
+    main.appendChild(linkDiv);
 
     const a = document.createElement("a");
     a.href = url;
     a.textContent = title;
-    row.appendChild(a);
+    linkDiv.appendChild(a);
 
     const descDiv = document.createElement("div");
     descDiv.className = "desc";
     descDiv.textContent = desc;
-    row.appendChild(descDiv);
+    linkDiv.appendChild(descDiv);
   });
 }
 

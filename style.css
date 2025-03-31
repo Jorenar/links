@@ -29,15 +29,15 @@ header h1 {
   margin: 0 3px;
 }
 
-table {
+main {
   width: 100%;
 }
 
-tr, td, th {
+main > div {
   padding: 0.7em;
 }
 
-table .desc {
+main .desc {
   font-size: 0.8em;
   color: #999;
 }
