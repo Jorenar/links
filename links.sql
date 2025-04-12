@@ -86,6 +86,7 @@ INSERT INTO links VALUES('Index of reviewed multimeters table','https://lygte-in
 INSERT INTO links VALUES('Internet Explorer is EVIL!','http://toastytech.com/evil/index.html',NULL);
 INSERT INTO links VALUES('IntroARM','https://opensecuritytraining.info/IntroARM.html',NULL);
 INSERT INTO links VALUES('ircdocs.horse','https://ircdocs.horse','Information and documentation about the IRC protocol');
+INSERT INTO links VALUES('Jargon File Resources','http://catb.org/jargon','');
 INSERT INTO links VALUES('Kanshudo','https://www.kanshudo.com',NULL);
 INSERT INTO links VALUES('Katalog Znaków Pocztowych','https://www.kzp.pl',NULL);
 INSERT INTO links VALUES('Keep a Changelog','https://keepachangelog.com',NULL);
@@ -157,6 +158,7 @@ INSERT INTO links VALUES('RSS-Bridge/rss-bridge','https://github.com/RSS-Bridge/
 INSERT INTO links VALUES('SailRabbit','https://www.sailrabbit.com/bmr/','Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) Calculator');
 INSERT INTO links VALUES('Satori Reader','https://www.satorireader.com',NULL);
 INSERT INTO links VALUES('SauceNAO','https://saucenao.com',NULL);
+INSERT INTO links VALUES('Scratchapixel','https://www.scratchapixel.com','');
 INSERT INTO links VALUES('Semantic Versioning','https://semver.org',NULL);
 INSERT INTO links VALUES('Shooting yourself in the foot in various programming languages','http://www.toodarkpark.org/computers/humor/shoot-self-in-foot.html',NULL);
 INSERT INTO links VALUES('siftrss','https://siftrss.com/','Filter RSS feed');
