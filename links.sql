@@ -11,6 +11,8 @@ INSERT INTO links VALUES('404PageFound','https://www.404pagefound.com','Active v
 INSERT INTO links VALUES('500 Mile Email','https://500mile.email','A curated list of absurd software bug stories');
 INSERT INTO links VALUES('8bitworkshop','https://8bitworkshop.com','Write 8-bit code in your browser');
 INSERT INTO links VALUES('Active GitHub Forks','https://techgaun.github.io/active-forks',NULL);
+INSERT INTO links VALUES('AHA Music','https://www.aha-music.com','Song finder');
+INSERT INTO links VALUES('Algorithmica','https://en.algorithmica.org','');
 INSERT INTO links VALUES('American Philatelic Society','https://stamps.org',NULL);
 INSERT INTO links VALUES('Aminet','https://aminet.net','A set of interconnected WWW and FTP servers hosting freely distributable Amiga software');
 INSERT INTO links VALUES('An Illustrated Guide to IPsec','http://unixwiz.net/techtips/iguide-ipsec.html',NULL);
@@ -19,6 +21,7 @@ INSERT INTO links VALUES('An Interactive Introduction to Fourier Transforms','ht
 INSERT INTO links VALUES('Angry Reviewer','https://www.angryreviewer.com','Academic style corrector for scientific writing');
 INSERT INTO links VALUES('AniCheck','https://anicheck.moe',NULL);
 INSERT INTO links VALUES('Animelon','https://animelon.com','Learn Japanese while watching anime with Japanese, English and romanized subtitles');
+INSERT INTO links VALUES('Architecture of Consoles | Rodrigo Copetti','https://www.copetti.org/writings/consoles/','');
 INSERT INTO links VALUES('Artificial Life Portal','http://en.alife.pl/main/e','Collection of interesting projects at the intersection of computer science, biology, physics and art');
 INSERT INTO links VALUES('ASCIIFlow','https://asciiflow.com',NULL);
 INSERT INTO links VALUES('Atarimania','http://www.atarimania.com',NULL);
@@ -141,6 +144,7 @@ INSERT INTO links VALUES('PlantText UML Editor','https://www.planttext.com',NULL
 INSERT INTO links VALUES('PlantUML','https://plantuml.com',NULL);
 INSERT INTO links VALUES('playlist.tools','https://playlist.tools','Reverse YouTube Playlists and more');
 INSERT INTO links VALUES('PolitePol','https://politepol.com',NULL);
+INSERT INTO links VALUES('POSIX - Shell Command Language - Parameter Expansion','https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_19_06_02','');
 INSERT INTO links VALUES('POSIX Shell Utilities','https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html',NULL);
 INSERT INTO links VALUES('Power Thesaurus','https://www.powerthesaurus.org',NULL);
 INSERT INTO links VALUES('PPA','https://www.ppa.pl','Polski Portal Amigowy');
@@ -195,6 +199,7 @@ INSERT INTO links VALUES('The IUPAC Compendium of Chemical Terminology','https:/
 INSERT INTO links VALUES('The On-Line Encyclopedia of Integer Sequences (OEIS)','https://oeis.org',NULL);
 INSERT INTO links VALUES('The Open Group Base Specifications Issue 7, 2018 edition - Environment Variables','https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html',NULL);
 INSERT INTO links VALUES('The Problem with Time & Timezones','https://www.youtube.com/watch?v=-5wpm-gesOY',NULL);
+INSERT INTO links VALUES('The Retro Web','https://theretroweb.com','');
 INSERT INTO links VALUES('The SEGA Hardware Database','https://hardware.segakore.fr/en',NULL);
 INSERT INTO links VALUES('The Ultimate Oldschool PC Font Pack','https://int10h.org/oldschool-pc-fonts',NULL);
 INSERT INTO links VALUES('TLD-List','https://tld-list.com','Compare prices of all Top-Level Domains');
@@ -216,6 +221,7 @@ INSERT INTO links VALUES('What every programmer should know about memory, Part 1
 INSERT INTO links VALUES('Word Cloud Generator','https://www.jasondavies.com/wordcloud',NULL);
 INSERT INTO links VALUES('World Stamp Catalogues','https://www.worldstampcatalogues.com',NULL);
 INSERT INTO links VALUES('Zapach papieru','https://zapach-papieru.pl','Strona fanów prasy o grach');
+INSERT INTO links VALUES('Zenodo','https://zenodo.org','Open-access research repository operated by CERN');
 INSERT INTO links VALUES('青空文庫','https://www.aozora.gr.jp','Classic Japanese novels for free');
 
 -- INSERT INTO links VALUES('','','');
