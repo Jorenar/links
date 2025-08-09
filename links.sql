@@ -26,6 +26,7 @@ INSERT INTO links VALUES('Big Book of Amiga Hardware','https://bigbookofamigahar
 INSERT INTO links VALUES('Big-O Algorithm Complexity Cheat Sheet (Know Thy Complexities!)','https://www.bigocheatsheet.com',NULL);
 INSERT INTO links VALUES('C64 Power','http://c64power.com','Kompendium Wiedzy o komputerze Commodore 64');
 INSERT INTO links VALUES('Carbon','https://carbon.now.sh','Create image of source code');
+INSERT INTO links VALUES('Chip Player JS','https://chiptune.app','');
 INSERT INTO links VALUES('Chmod Calculator','https://chmodcommand.com',NULL);
 INSERT INTO links VALUES('Choose an open source license','https://choosealicense.com',NULL);
 INSERT INTO links VALUES('chubin/awesome-console-services','https://github.com/chubin/awesome-console-services','Console services reachable via network protocols');
@@ -82,6 +83,7 @@ INSERT INTO links VALUES('Jargon File Resources','http://catb.org/jargon','');
 INSERT INTO links VALUES('Kanshudo','https://www.kanshudo.com',NULL);
 INSERT INTO links VALUES('Katalog Znaków Pocztowych','https://www.kzp.pl',NULL);
 INSERT INTO links VALUES('Keep a Changelog','https://keepachangelog.com',NULL);
+INSERT INTO links VALUES('keygenmusic.tk','https://keygenmusic.tk','');
 INSERT INTO links VALUES('Kill the Newsletter!','https://kill-the-newsletter.com',NULL);
 INSERT INTO links VALUES('kitsunekko - Japanese subtitles','http://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F',NULL);
 INSERT INTO links VALUES('Langserver.org','https://langserver.org',NULL);
@@ -118,9 +120,11 @@ INSERT INTO links VALUES('OpenGameArt.org','https://opengameart.org','Free, lega
 INSERT INTO links VALUES('OpenRetro Game Database','https://openretro.org',NULL);
 INSERT INTO links VALUES('Oscar Forner - Sorting algorithms','https://oscarforner.com/blog/2020-02-10-sorting-algorithms',NULL);
 INSERT INTO links VALUES('Oscilloscope Music','https://oscilloscopemusic.com',NULL);
+INSERT INTO links VALUES('OSHub','https://oshub.org','');
 INSERT INTO links VALUES('Papers We Love','https://paperswelove.org',NULL);
 INSERT INTO links VALUES('PCjs Machines','https://www.pcjs.org',NULL);
 INSERT INTO links VALUES('PDF24 Tools','https://tools.pdf24.org/en',NULL);
+INSERT INTO links VALUES('Pixeltune','https://pixeltune.org','online MIDI and video game music (VGM) player');
 INSERT INTO links VALUES('PlantText UML Editor','https://www.planttext.com',NULL);
 INSERT INTO links VALUES('PlantUML','https://plantuml.com',NULL);
 INSERT INTO links VALUES('playlist.tools','https://playlist.tools','Reverse YouTube Playlists and more');
@@ -129,6 +133,7 @@ INSERT INTO links VALUES('POSIX - Shell Command Language - Parameter Expansion',
 INSERT INTO links VALUES('POSIX Shell Utilities','https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html',NULL);
 INSERT INTO links VALUES('Power Thesaurus','https://www.powerthesaurus.org',NULL);
 INSERT INTO links VALUES('PPA','https://www.ppa.pl','Polski Portal Amigowy');
+INSERT INTO links VALUES('Privacy Guides','https://www.privacyguides.org','');
 INSERT INTO links VALUES('ProofWiki','https://proofwiki.org/wiki/Main_Page',NULL);
 INSERT INTO links VALUES('ProtonDB','https://www.protondb.com',NULL);
 INSERT INTO links VALUES('Quick C++ Benchmarks','https://quick-bench.com','');
