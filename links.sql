@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS "links" (
     description TEXT
 );
 
+-- INSERT INTO links VALUES('','','');
+
 INSERT INTO links VALUES('404PageFound','https://www.404pagefound.com','Active vintage websites, old webpages and web 1.0');
 INSERT INTO links VALUES('500 Mile Email','https://500mile.email','A curated list of absurd software bug stories');
 INSERT INTO links VALUES('AHA Music','https://www.aha-music.com','Song finder');
@@ -21,6 +23,7 @@ INSERT INTO links VALUES('Architecture of Consoles | Rodrigo Copetti','https://w
 INSERT INTO links VALUES('Artificial Life Portal','http://en.alife.pl/main/e','Collection of interesting projects at the intersection of computer science, biology, physics and art');
 INSERT INTO links VALUES('ASCIIFlow','https://asciiflow.com',NULL);
 INSERT INTO links VALUES('Atarimania','http://www.atarimania.com',NULL);
+INSERT INTO links VALUES('AutoEq','https://www.autoeq.app','');
 INSERT INTO links VALUES('Backwards Compatibilty Chart','https://docs.google.com/spreadsheets/d/13BnuFlQUVbxLMYRO5Ms8TUhbiefmXsUE69OYVwp1mZ0','Check which game systems are backward compatible');
 INSERT INTO links VALUES('Big Book of Amiga Hardware','https://bigbookofamigahardware.com',NULL);
 INSERT INTO links VALUES('Big-O Algorithm Complexity Cheat Sheet (Know Thy Complexities!)','https://www.bigocheatsheet.com',NULL);
@@ -53,6 +56,7 @@ INSERT INTO links VALUES('Dr Chip''s Vim Page','http://www.drchip.org/astronaut/
 INSERT INTO links VALUES('Electronic Handheld Game Museum','https://www.handheldmuseum.com',NULL);
 INSERT INTO links VALUES('ELMak''s Remote Control Search','https://wyszukiwarka.elmak.pl',NULL);
 INSERT INTO links VALUES('Emperor Sh and the Traveller','https://sanctum.geek.nz/etc/emperor-sh-and-the-traveller.txt',NULL);
+INSERT INTO links VALUES('Espresso Aficionados','https://espressoaf.com','');
 INSERT INTO links VALUES('Everything Amiga','https://www.everythingamiga.com',NULL);
 INSERT INTO links VALUES('EXPONET','http://www.exponet.info/index.php?lng=EN','Virtual international philatelic exhibition');
 INSERT INTO links VALUES('Feed Creator','http://createfeed.fivefilters.org',NULL);
@@ -163,6 +167,7 @@ INSERT INTO links VALUES('Sprout Anime Recommender','https://anime.ameo.dev',NUL
 INSERT INTO links VALUES('Spurious Correlations','https://tylervigen.com/spurious-correlations',NULL);
 INSERT INTO links VALUES('SQLBolt','https://sqlbolt.com','A series of interactive lessons and exercises designed for learning SQL right in browser');
 INSERT INTO links VALUES('Squares in Squares','https://kingbird.myphotos.cc/packing/squares_in_squares.html','');
+INSERT INTO links VALUES('Squiglink ','https://squig.link','');
 INSERT INTO links VALUES('Steam Calculator','https://steamdb.info/calculator',NULL);
 INSERT INTO links VALUES('Stemplowanie i kasowanie, czyli o pieczątkach w filatelistyce','http://www.stampler.pl/porady,stemplowanie',NULL);
 INSERT INTO links VALUES('SVGOMG','https://jakearchibald.github.io/svgomg','Web GUI for SVGO (SVG optimizer)');
@@ -204,7 +209,5 @@ INSERT INTO links VALUES('World Stamp Catalogues','https://www.worldstampcatalog
 INSERT INTO links VALUES('Zapach papieru','https://zapach-papieru.pl','Strona fanów prasy o grach');
 INSERT INTO links VALUES('Zenodo','https://zenodo.org','Open-access research repository operated by CERN');
 INSERT INTO links VALUES('青空文庫','https://www.aozora.gr.jp','Classic Japanese novels for free');
-
--- INSERT INTO links VALUES('','','');
 
 COMMIT;
